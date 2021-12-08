@@ -1,3 +1,9 @@
+/*******************************************************************************\
+| Para executar, é necessário possuir um token gerado pela API.                 |
+| Basta acessar "https://advisor.climatempo.com.br/" e criar uma conta.         |
+| Acessar "https://advisor.climatempo.com.br/home/#!/tokens" e criar um projeto |
+\*******************************************************************************/
+
 block-level on error undo, throw.
 
 using OpenEdge.Net.HTTP.IHttpRequest.
@@ -27,7 +33,8 @@ def temp-table city no-undo
     field country as char format "x(2)"
     index id country state name.
 
-assign c-url = "http://apiadvisor.climatempo.com.br/api/v1/locale/city?country=BR&token=8b6c5354efd22f80e272d73776cdd10c".
+assign c-token = "" /* Insira seu token aqui */
+       c-url   = "http://apiadvisor.climatempo.com.br/api/v1/locale/city?country=BR&token=" + c-token.
 
 oReq = RequestBuilder:Get(c-url):Request.
 oRes = ClientBuilder:Build():Client:Execute(oReq).
